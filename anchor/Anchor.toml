@@ -1,8 +1,11 @@
+[toolchain]
+
 [features]
 seeds = false
 skip-lint = false
+
 [programs.localnet]
-counter = "EuJfgknXicf6iZASeagt5U6XDDPpLTQrvWPW31vgAwo8"
+counter = "3KCNCJuETwV6ALJXs3JpAmxLVXYGipQ4nYVYMaDXKRxG"
 
 [registry]
 url = "https://api.apr.dev"
