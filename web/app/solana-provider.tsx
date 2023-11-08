@@ -20,8 +20,9 @@ import {
 require('@solana/wallet-adapter-react-ui/styles.css');
 
 export interface SolanaProviderContext {
-  cluster: Cluster;
+  cluster: Cluster | string;
   endpoint: string;
+  explorerUrl: (path: string) => string;
   setCluster?: (cluster: Cluster) => void;
 }
 
@@ -30,8 +31,15 @@ const Context = createContext<SolanaProviderContext>(
 );
 
 export function SolanaProvider({ children }: { children: ReactNode }) {
-  const [cluster, setCluster] = useState<Cluster>('devnet');
-  const endpoint = useMemo(() => clusterApiUrl(cluster), [cluster]);
+  const explorerUrl = 'https://explorer.solana.com';
+  const [cluster, setCluster] = useState<Cluster | string>(
+    'http://localhost:8899'
+  );
+  const endpoint = useMemo(
+    () =>
+      cluster.startsWith('http') ? cluster : clusterApiUrl(cluster as Cluster),
+    [cluster]
+  );
   const wallets = useMemo(
     () => [new UnsafeBurnerWalletAdapter(), new SolflareWalletAdapter()],
     [cluster]
@@ -44,6 +52,19 @@ export function SolanaProvider({ children }: { children: ReactNode }) {
   const value: SolanaProviderContext = {
     cluster,
     endpoint,
+    explorerUrl: useMemo(
+      () => (path: string) =>
+        `${explorerUrl}${path}${
+          cluster === 'mainnet-beta'
+            ? ''
+            : `?cluster=${
+                cluster.startsWith('http')
+                  ? `custom&customUrl=${cluster}`
+                  : `${cluster}`
+              }`
+        }`,
+      [cluster]
+    ),
     setCluster,
   };
   return (

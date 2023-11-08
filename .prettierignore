@@ -9,3 +9,5 @@ node_modules
 dist
 build
 test-ledger
+.yarn/releases
+web/.next

@@ -2,7 +2,17 @@
   "name": "@app-1699408735/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "yarn nx run-many --target=build --all",
+    "build:anchor": "nx run anchor:build",
+    "build:web": "nx run web:build",
+    "dev": "nx run web:serve",
+    "format": "yarn nx format:write --all",
+    "lint": "yarn nx run-many --target=lint --all",
+    "test": "yarn nx run-many --target=test --all",
+    "test:anchor": "nx run anchor:test",
+    "test:web": "nx run web:test"
+  },
   "private": true,
   "dependencies": {
     "@coral-xyz/anchor": "^0.29.0",

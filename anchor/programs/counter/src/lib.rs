@@ -16,6 +16,11 @@ pub mod counter {
     ctx.accounts.counter.count = ctx.accounts.counter.count.checked_add(1).unwrap();
     Ok(())
   }
+
+  pub fn decrement(ctx: Context<Increment>) -> Result<()> {
+    ctx.accounts.counter.count = ctx.accounts.counter.count.checked_sub(1).unwrap();
+    Ok(())
+  }
 }
 
 #[derive(Accounts)]

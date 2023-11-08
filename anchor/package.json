@@ -1,7 +1,9 @@
 {
   "name": "@app-1699408735/anchor",
   "version": "0.0.1",
-  "dependencies": {},
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.29.0"
+  },
   "type": "commonjs",
   "main": "./index.cjs",
   "module": "./index.js"

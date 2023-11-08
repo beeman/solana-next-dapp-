@@ -1,13 +1,9 @@
 'use client';
+import Image from 'next/image';
 import { ReactNode } from 'react';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
+import { WalletMultiButton } from '../components/wallet-buttons';
 
-const WalletMultiButton = dynamic(
-  async () =>
-    (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
-  { ssr: false }
-);
 export function AppLayout({ children }: { children: ReactNode }) {
   const { pathname } = { pathname: '' };
   const pages = [
@@ -21,7 +17,12 @@ export function AppLayout({ children }: { children: ReactNode }) {
       <div className="navbar bg-base-300 text-neutral-content">
         <div className="flex-1">
           <Link href="/" className="btn btn-ghost normal-case text-xl">
-            @solana-developers/preset-next
+            <Image
+              src={'/solana-logo.png'}
+              alt="Solana Logo"
+              width={120}
+              height={18}
+            />
           </Link>
           <ul className="menu menu-horizontal px-1">
             {pages.map(({ label, path }) => (
